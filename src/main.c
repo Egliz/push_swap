@@ -6,11 +6,19 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:10:15 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/10 13:50:33 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:43:31 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+//#include "push_swap.h"
+//#include "libft.h"
+int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 //FTS OF VERIFICATION
 int	is_number(char **str)
@@ -34,47 +42,33 @@ int	is_number(char **str)
 	}
 	return (1);
 }
-int ordered(int *nb, int cantidad)
-{
-	int i;
-	int j;
 
-	i = 1;
-	j = i-1;
-	while (i < cantidad)
+int	ft_atoi(char *nptr)
+{
+	int		result;
+	int		sign;
+
+	result = 0;
+	sign = 1;
+	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == 32))
 	{
-		if(nb[i] > nb[j])
-		{
-			j++;
-		}
-		else
-		{
-			return (1);
-		}
-		i++;
+		nptr++;
 	}
-	return (0);
+	if (*nptr == '-')
+	{
+		sign = -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+		nptr++;
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		result = result * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (result * sign);
 }
 
-int *conv(char **str, int cantidad)
-{
-	int i;
-	int j;
-	int *nb;
-
-	i = 0;
-	j = 1;
-	nb = (int *)malloc(cantidad * sizeof(int));
-	if (nb == NULL)
-		return (0);
-	while (i < cantidad)
-	{
-		nb[i] = ft_atoi(str[j]);
-		i++;
-		j++;
-	}
-	return (nb);
-}
 
 int duplicate(int *nb, int cantidad)
 {
@@ -95,52 +89,48 @@ int duplicate(int *nb, int cantidad)
 		}
 		i++;
 	}
+//	i++;
 	return (1);
 }
 int verification (char **str, int cantidad)
 {
-	//int i;
+	int i;
 	int *nb;
-	//int j;
+	int j;
 	
-	//j = 1;
-	//i = 0;
+	j = 1;
+	i = 0;
 	if(!is_number(str))
 	{
-		write(2, "ErrorNoNum\n", 11);
-		exit(1);
+		write(1, "ErrorNoNum\n", 11);
+		return (0);
 	}
-	nb = conv(str, cantidad);
-	//nb = (int *)malloc(cantidad * sizeof(int));
-	//if (nb == NULL)
-	//	return(0);
-	//while (i < cantidad)
-//	{
-//		nb[i] = ft_atoi(str[j]);
-//		j++;
-//		i++;
-//	}
+	nb = (int *)malloc(cantidad * sizeof(int));
+	if (nb == NULL)
+		return(0);
+	while (i < cantidad)
+	{
+		nb[i] = ft_atoi(str[j]);
+		j++;
+		i++;
+	}
 	if(duplicate(nb, cantidad) == 0)
 	{
 		free(nb);
-		write(2, "ErrorDup\n", 9);
-		exit (1);
-	}
-	if(ordered(nb, cantidad) == 0)
-	{
-		free(nb);
-		write(2, "Ordenados. QUITAR ESTE WRITE\n",29);
-		exit (1);
+		write(1, "ErrorDup\n", 9);
+		return (0);
 	}
 	return (1);
 }
 
 int	main(int argc, char **argv)
 {
+//	int i;
 	int cantidad;
 
 	cantidad = argc - 1;
-	if(argc >= 2)
+//	i = 1;
+//	while(i < argc)
 		verification(argv, cantidad); // argv[1], argv[2]
 	return (0);
 }
