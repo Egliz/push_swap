@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:10:15 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/10 13:50:33 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:36:58 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,37 @@ int	is_number(char **str)
 	}
 	return (1);
 }
-int ordered(int *nb, int cantidad)
+
+void wrerror()
+{
+	write(2, "Error\n", 6);
+	exit(1);
+}
+int limit(long *nb, int count)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < count)
+	{
+		if(nb[j] > 2147483647)
+			return (0);
+	j++;
+	i++;
+	}
+	return (1);
+}
+	
+int ordered(long *nb, int count)
 {
 	int i;
 	int j;
 
 	i = 1;
 	j = i-1;
-	while (i < cantidad)
+	while (i < count)
 	{
 		if(nb[i] > nb[j])
 		{
@@ -56,18 +79,18 @@ int ordered(int *nb, int cantidad)
 	return (0);
 }
 
-int *conv(char **str, int cantidad)
+long *conv(char **str, int count)
 {
 	int i;
 	int j;
-	int *nb;
+	long *nb;
 
 	i = 0;
 	j = 1;
-	nb = (int *)malloc(cantidad * sizeof(int));
+	nb = (long *)malloc(count * sizeof(long));
 	if (nb == NULL)
 		return (0);
-	while (i < cantidad)
+	while (i < count)
 	{
 		nb[i] = ft_atoi(str[j]);
 		i++;
@@ -76,16 +99,16 @@ int *conv(char **str, int cantidad)
 	return (nb);
 }
 
-int duplicate(int *nb, int cantidad)
+int duplicate(long *nb, int count)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while(i < cantidad)
+	while(i < count)
 	{
 		j = i + 1;
-		while(j < cantidad)
+		while(j < count)
 		{
 			if(nb[i] == nb[j])
 			{
@@ -97,50 +120,37 @@ int duplicate(int *nb, int cantidad)
 	}
 	return (1);
 }
-int verification (char **str, int cantidad)
+int verification (char **str, int count)
 {
-	//int i;
-	int *nb;
-	//int j;
-	
-	//j = 1;
-	//i = 0;
+	long *nb;
+
+	nb = conv(str, count);
+	if(!limit(nb, count))
+	{
+		free(nb);
+		wrerror();
+	}
 	if(!is_number(str))
-	{
-		write(2, "ErrorNoNum\n", 11);
-		exit(1);
-	}
-	nb = conv(str, cantidad);
-	//nb = (int *)malloc(cantidad * sizeof(int));
-	//if (nb == NULL)
-	//	return(0);
-	//while (i < cantidad)
-//	{
-//		nb[i] = ft_atoi(str[j]);
-//		j++;
-//		i++;
-//	}
-	if(duplicate(nb, cantidad) == 0)
+		wrerror();
+	if(duplicate(nb, count) == 0)
 	{
 		free(nb);
-		write(2, "ErrorDup\n", 9);
-		exit (1);
+		wrerror();
 	}
-	if(ordered(nb, cantidad) == 0)
+	if(ordered(nb, count) == 0)
 	{
 		free(nb);
-		write(2, "Ordenados. QUITAR ESTE WRITE\n",29);
-		exit (1);
+		wrerror();
 	}
 	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	int cantidad;
+	int count;
 
-	cantidad = argc - 1;
+	count = argc - 1;
 	if(argc >= 2)
-		verification(argv, cantidad); // argv[1], argv[2]
+		verification(argv, count); // argv[1], argv[2]
 	return (0);
 }
