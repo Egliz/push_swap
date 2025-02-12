@@ -6,7 +6,7 @@
 #    By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 12:19:41 by emorillo          #+#    #+#              #
-#    Updated: 2025/02/07 11:20:42 by emorillo         ###   ########.fr        #
+#    Updated: 2025/02/12 16:34:46 by emorillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,13 @@ LIBFT_PATH = include/libft
 LIBFTA = $(LIBFT_PATH)/libft.a
 LIBFT_INC = $(LIBFT_PATH)/include
 
-SRC = main.c
+SRC = lists/lstlast.c lists/new.c lists/add_back.c
 OBJS = $(SRC:.c=.o)
 
 all: lib $(NAME)
 
 $(NAME): $(OBJS) $(LIBFTA)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFTA) -o $(NAME)
+	$(CC) $(CFLAGS) main.c $(OBJS) $(LIBFTA) -o $(NAME)
 
 %.o: %.c Makefile
 	$(CC) $(CFLAGS) -I$(LIBFT_INC) -c $< -o $@

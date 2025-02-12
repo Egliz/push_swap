@@ -6,11 +6,40 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:10:15 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/10 17:36:58 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/12 17:41:33 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//t_stack	*new(void *content)
+//{
+//	t_stack	*new_node;
+//
+//	new_node = malloc(sizeof(t_stack));
+//	if (new_node == NULL)
+//		return (NULL);
+//	new_node->value = content;
+//	new_node->next = NULL;
+//	return (new_node);
+//}
+
+//void	add_back(t_stack **lst, t_stack *new)
+//{
+//	t_stack	*last;
+//
+//	if (lst == NULL || new == NULL)
+//		return ;
+//	if (*lst == NULL)
+//		*lst = new;
+//	else
+//	{
+//		last = ft_lstlast(*lst);
+//		last->next = new;
+//	}
+//}
+
+
 
 //FTS OF VERIFICATION
 int	is_number(char **str)
@@ -33,6 +62,29 @@ int	is_number(char **str)
 		i++;
 	}
 	return (1);
+}
+
+void stk(char **str, int count)
+{
+	int		i;
+	int		j;
+	long	*nb;
+	t_stack *stack_a;
+	t_stack *stack_b;
+	t_stack *node;
+
+	i = 1;
+	j = 0;
+	stack_a = NULL;
+	stack_b = NULL;
+	nb = conv(str, count);
+	while (i < count)
+	{
+		node = new(nb[j]);
+		add_back(&stack_a, node);
+		j++;
+		i++;
+	}
 }
 
 void wrerror()
@@ -151,6 +203,7 @@ int	main(int argc, char **argv)
 
 	count = argc - 1;
 	if(argc >= 2)
-		verification(argv, count); // argv[1], argv[2]
+		verification(argv, count);
+	stk(argv, count);
 	return (0);
 }
