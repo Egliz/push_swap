@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_back.c                                         :+:      :+:    :+:   */
+/*   lists1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 12:39:29 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/12 16:33:11 by emorillo         ###   ########.fr       */
+/*   Created: 2025/02/13 18:02:16 by emorillo          #+#    #+#             */
+/*   Updated: 2025/02/13 18:12:17 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
-void	add_back(t_stack **lst, t_stack *new)
+int	size(t_stack *lst)
 {
-	t_stack	*last;
+	int		i;
 
-	if (lst == NULL || new == NULL)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
+	i = 0;
+	while (lst != NULL)
 	{
-		last = lstlast(*lst);
-		last->next = new;
+		i++;
+		lst = lst->next;
 	}
+	return (i);
 }

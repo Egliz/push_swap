@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/12 17:34:42 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:39:09 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,28 @@ int		duplicate(long *nb, int count);
 int		limit(long *nb, int count);
 long	*conv(char **str, int count);
 int		ordered(long *nb, int count);
+
+//utils.c
 //write
 void	wrerror(void);
-//main
+
+//main.c
 int		main(int argc, char **argv);
+
 //LISTAS
+//lists.c
+
 void	add_back(t_stack **lst, t_stack *new);
 t_stack *new(int content);
 t_stack	*lstlast(t_stack *lst);
+void	printlst(t_stack *node);
 
+//lists1.c
+int		size(t_stack *lst);
+
+//utils.c
+void	init (char **str, int count);
+
+//MOVEMENTS
+void	sa(t_stack **node);
 #endif
