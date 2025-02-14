@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/13 19:32:52 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:15:32 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ void init(char **str, int count)
 		j++;
 		i++;
 	}
-	printlst(stack_a);
-	//free(stack_a);
+	printlst(stack_a);//imprime la lista antes de ordenar
+	sa(&stack_a);
+	printlst(stack_a);//imprime la lista modificada
+	//free(stack_a); tambien podria ser free(nb); ya que termine de usarlo, despues de aqui no vuelvo a utilizar ese array
 }
 
 
