@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/13 18:39:09 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:53:42 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ int		size(t_stack *lst);
 void	init (char **str, int count);
 
 //MOVEMENTS
-void	sa(t_stack **node);
+void	move(t_stack **node);
+void	sa(t_stack **a);
+void	sb(t_stack **b);
+void	ss(t_stack **a, t_stack **b);
+void	pa(t_stack **a, t_stack **b);
 #endif

@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/14 17:15:32 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:32:06 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	printlst(t_stack *node)
 {
 	if (node == NULL)
 	{
-		printf("lista vacia, QUITAR ESTA FUNCION, esta en lists.c");
+		printf("\nlista vacia.\n");
 		return ;
 	}
 	printf("lista creada, QUITAR ESTA FUNCION, esta en lists.c\n");
@@ -87,9 +87,11 @@ void init(char **str, int count)
 		j++;
 		i++;
 	}
-	printlst(stack_a);//imprime la lista antes de ordenar
+	printlst(stack_a);//imprime la lista A, antes de ordenar
 	sa(&stack_a);
-	printlst(stack_a);//imprime la lista modificada
+	//pa(&stack_a, &stack_b);
+	printlst(stack_a);//imprime la lista A, modificada
+	//printlst(stack_b);//imprime la lista B, modificada
 	//free(stack_a); tambien podria ser free(nb); ya que termine de usarlo, despues de aqui no vuelvo a utilizar ese array
 }
 

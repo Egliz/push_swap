@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/13 16:01:55 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:37:59 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ long *conv(char **str, int count)
 
 void wrerror()
 {
-	write(2, "Error\n", 6);
+	write(2, "\e[0;31mError\e[0m\n", 17);
 	exit(1);
 }
 

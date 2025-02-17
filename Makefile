@@ -6,7 +6,7 @@
 #    By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 12:19:41 by emorillo          #+#    #+#              #
-#    Updated: 2025/02/13 18:01:16 by emorillo         ###   ########.fr        #
+#    Updated: 2025/02/17 18:59:09 by emorillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT_PATH = include/libft
 LIBFTA = $(LIBFT_PATH)/libft.a
 LIBFT_INC = $(LIBFT_PATH)/include
 
-SRC = lists.c main.c verifications.c utils.c mva.c lists1.c
+SRC = lists.c main.c verifications.c utils.c mva.c mvb.c lists1.c
 OBJS = $(SRC:.c=.o)
 
 all: lib $(NAME)
