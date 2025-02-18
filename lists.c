@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/17 20:32:06 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:21:08 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	printlst(t_stack *node)
 		printf("\nlista vacia.\n");
 		return ;
 	}
-	printf("lista creada, QUITAR ESTA FUNCION, esta en lists.c\n");
+	printf("esta en lists.c\n");
 	while (node != NULL)
 	{
 		printf("%d -> ", node->value);
@@ -87,11 +87,20 @@ void init(char **str, int count)
 		j++;
 		i++;
 	}
+	printf("\nA\n");
 	printlst(stack_a);//imprime la lista A, antes de ordenar
+	printf("\n\nA\n");
 	sa(&stack_a);
-	//pa(&stack_a, &stack_b);
 	printlst(stack_a);//imprime la lista A, modificada
-	//printlst(stack_b);//imprime la lista B, modificada
+	pa(&stack_a, &stack_b);
+	printf("\n\nB\n");
+	printlst(stack_b);
+	printf("\n\nA\n");
+	printlst(stack_a);
+	printf("\n\nA\n");
+	pb(&stack_b, &stack_a);
+	printlst(stack_a);
+	printlst(stack_b);//imprime la lista B, modificada
 	//free(stack_a); tambien podria ser free(nb); ya que termine de usarlo, despues de aqui no vuelvo a utilizar ese array
 }
 
