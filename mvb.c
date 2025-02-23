@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:11:56 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/18 18:20:55 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/23 22:04:15 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,25 @@ void pb(t_stack **b, t_stack **a)
 	tmp->next = *b;
 	(*b) = tmp;
 	write(1, "pb\n", 3);
+}
+
+void	ra(t_stack **a)
+{
+	t_stack *tmp;
+	t_stack	*last;
+	
+	if(*a == NULL || (*a)->next == NULL)
+		return ;
+	tmp = (*a);//guarda la referencia al primer nodo (como quien dice tmp ahora es el primero (la cabeza))
+	(*a)= (*a)->next;//moviendo la cabeza al segundo nodo, para que sea el primero
+	last = (*a); // ahora es una referencia al segundo
+	while (last->next != NULL)
+	{
+		last = last->next;
+	}
+	last->next = tmp;
+	tmp->next = NULL;
+	write(1, "ra\n", 3);
+
 }
 
