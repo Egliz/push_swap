@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/23 21:32:29 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:15:45 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,9 @@ void	sb(t_stack **b);
 void	ss(t_stack **a, t_stack **b);
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **a, t_stack **b);
+void	rotate(t_stack **node);
 void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+void	rev_rotate(t_stack **node);
 #endif
