@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/24 20:17:46 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:34:24 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,23 +87,31 @@ void init(char **str, int count)
 		j++;
 		i++;
 	}
-//	printf("\nA\n");
-//	printlst(stack_a);//imprime la lista A, antes de ordenar
-	//printf("\n\nB\n");
-	//printlst(stack_b);
-	//sa(&stack_a);
-	//printlst(stack_a);//imprime la lista A, modificada
-	//pa(&stack_a, &stack_b);
-	//printf("\n\nB\n");
-	//printlst(stack_b);
-	//printf("\n\nA\n");
-	//printlst(stack_a);
-	//printf("\n\nA\n");
-//	pb(&stack_b, &stack_a);
-//	printf("\nB\n");
-	//printlst(stack_b);
-	//printf("\nA\n");
-	//printlst(stack_a);
+	printf("\nA\n");
+	printlst(stack_a);//imprime la lista A, antes de ordenar
+	printf("\n\nB\n");
+	printlst(stack_b);
+	sa(&stack_a);
+	printf("\nA\n");
+	printlst(stack_a);//imprime la lista A, modificada
+	pb(&stack_b, &stack_a);
+	printf("\n\nB\n");
+	printlst(stack_b);
+	pa(&stack_a, &stack_b);
+	printf("\nA\n");
+	printlst(stack_a);
+	ra(&stack_a);
+	printf("\n\nA\n");
+	printlst(stack_a);
+	rb(&stack_b);
+	printf("\n\nB\n");
+	printlst(stack_b);
+	rra(&stack_a);
+	printf("\nA\n");
+	printlst(stack_a);
+	rrb(&stack_b);
+	printf("\nB\n");
+	printlst(stack_b);
 	//ra(&stack_a);
 	//printf("\nlista A despues del ra\n");
 	//printlst(stack_a);
@@ -116,30 +124,33 @@ void init(char **str, int count)
 	//free(stack_a); tambien podria ser free(nb); ya que termine de usarlo, despues de aqui no vuelvo a utilizar ese array
 
 	// Imprime antes de cualquier operación
-printf("\nA\n");
-printlst(stack_a);  // Lista A original
-printf("\nB\n");
-printlst(stack_b);  // Lista B vacía inicialmente
+//printf("\nA\n");
+//printlst(stack_a);  // Lista A original
+//printf("\nB\n");
+//printlst(stack_b);  // Lista B vacía inicialmente
 
 // Mueve el primer elemento de A a B
-pb(&stack_b, &stack_a);
-printf("\nB después de pb\n");
-printlst(stack_b);  // Lista B debería tener el primer elemento de A
+//pb(&stack_b, &stack_a);
+//printf("\nB después de pb\n");
+//printlst(stack_b);  // Lista B debería tener el primer elemento de A
 
 // Realiza la rotación de A
-ra(&stack_a);
-printf("\nA después de ra\n");
-printlst(stack_a);  // Lista A debería estar rotada
+//printf("\n\n");
+//ra(&stack_a);
+//printf("\nA después de ra\n");
+//printlst(stack_a);  // Lista A debería estar rotada
 
 // B nuevamente
-printf("\nB después de pb y ra\n");
-printlst(stack_b);
-
-printf("\nAA\n");
-rev_rotate(&stack_a);
+//printf("\nB después de pb y ra\n");
+//printlst(stack_b);
+/*
+printf("\nDespues de rra\n");
+rra(&stack_a);
+printf("\n\n");
 printlst(stack_a);
-
-
+printf("\nB\n");
+printlst(stack_b);
+*/
 }
 
 
