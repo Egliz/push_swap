@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/25 17:10:27 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:48:00 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct s_stack
 {
 	int			value;
+	//int			index;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -52,7 +53,11 @@ void	printlst(t_stack *node);
 int		size(t_stack *lst);
 
 //utils.c
+
+//stacks.c
 void	init (char **str, int count);
+void	sort_stack(t_stack **a, t_stack **b);
+void	sort_two(t_stack **a);
 
 //MOVEMENTS
 void	move(t_stack **node);

@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/25 17:34:24 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/04 17:40:31 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,7 @@ void	printlst(t_stack *node)
 	}
 	//free(node);
 }
-
-void init(char **str, int count)
-{
-	int		i;
-	int		j;
-	long	*nb;
-	t_stack *stack_a;
-	t_stack *stack_b;
-	t_stack *node;
-
-	i = 1;
-	j = 0;
-	stack_a = NULL;
-	stack_b = NULL;
-	nb = conv(str, count);
-	while (i <= count)
-	{
-		node = new(nb[j]);
-		add_back(&stack_a, node);
-		j++;
-		i++;
-	}
+/*
 	printf("\nA\n");
 	printlst(stack_a);//imprime la lista A, antes de ordenar
 	printf("\n\nB\n");
@@ -143,7 +122,7 @@ void init(char **str, int count)
 // B nuevamente
 //printf("\nB después de pb y ra\n");
 //printlst(stack_b);
-/*
+
 printf("\nDespues de rra\n");
 rra(&stack_a);
 printf("\n\n");
@@ -151,6 +130,5 @@ printlst(stack_a);
 printf("\nB\n");
 printlst(stack_b);
 */
-}
 
 
