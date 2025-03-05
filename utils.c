@@ -6,12 +6,12 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/05 13:51:32 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 19:56:12 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+//NO + FUNCIONES
 long *conv(char **str, int count)
 {
 	int i;
@@ -48,5 +48,33 @@ void free_stack(t_stack **stack)
         free(*stack);
         *stack = tmp;
     }
+}
+
+int	max_value(t_stack *b)
+{
+	int max; 
+
+	max = b->value;//el primero de B
+	while(b->next != NULL)
+	{
+		if(b->value > max)
+			max = b ->value;
+		b = b->next;
+	}
+	return (max);
+}
+
+int	min_value(t_stack *b)
+{
+	int min;
+
+	min = b->value;
+	while(b->next != NULL)
+	{	
+		if(b->value < min)
+			min = b->value;
+		b = b->next;
+	}
+	return (min);
 }
 

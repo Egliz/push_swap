@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/05 13:44:55 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 20:57:35 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int		ordered(long *nb, int count);
 
 //utils.c
 void	free_stack(t_stack **stack);
+int		max_value(t_stack *b);
+int		min_value(t_stack *b);
 //write
 void	wrerror(void);
 
@@ -53,12 +55,11 @@ void	printlst(t_stack *node);
 //lists1.c
 int		size(t_stack *lst);
 
-//utils.c
-
 //stacks.c
 void	init (char **str, int count, t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **a, t_stack **b);
 void	sort_two(t_stack **a);
+void	sort_bigg(t_stack **a, t_stack **b);
 
 //MOVEMENTS
 void	move(t_stack **node);
