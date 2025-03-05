@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/17 17:37:59 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:51:32 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,17 @@ void wrerror()
 {
 	write(2, "\e[0;31mError\e[0m\n", 17);
 	exit(1);
+}
+
+void free_stack(t_stack **stack)
+{
+    t_stack *tmp;
+
+    while (*stack)
+    {
+        tmp = (*stack)->next;
+        free(*stack);
+        *stack = tmp;
+    }
 }
 

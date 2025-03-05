@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/04 19:35:41 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:00:08 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,30 @@ void sort_two(t_stack **a)
 
 void sort_three(t_stack **a)//NO + LINEAS
 {
-	int pmro;
 	int sdo;
 	int tro;
 
-	pmro = (*a)->value;
 	sdo = (*a)->next->value;
 	tro = (*a)->next->next->value;
 	//las lineas son largas, poner el valor del 3ro en una variable
-	if(pmro > sdo && pmro > tro && sdo > tro)
+	if((*a)->value > sdo && (*a)->value > tro && sdo > tro)
 	{
 		sa(a);
 		rra(a);
 	}
-	else if(pmro > sdo && sdo < tro && pmro > tro)
+	else if((*a)->value > sdo && sdo < tro && (*a)->value > tro)
 		ra(a);
-/*	else if()
-	{	
-		algo
-		algo
+	else if((*a)->value > tro && (*a)->value < sdo && sdo > tro)
+		rra(a);
+	else if((*a)->value < tro && (*a)->value > sdo && tro > sdo)
+		sa(a);
+	else if((*a)->value < sdo && (*a)->value < tro && sdo > tro)
+	{
+		rra(a);
+		sa(a);
 	}
-	else if
-		algo
-	else if
-		algo
-	*/
 	else
-		printf("No entreee");
+		return ;
 	printlst(*a);
 }
 /*
@@ -73,26 +70,25 @@ void sort_stack(t_stack **a, t_stack **b)
 
 
 
-void init(char **str, int count)//NO + LINEAS
+void init(char **str, int count, t_stack **stack_a, t_stack **stack_b)//NO + LINEAS
 {
 	int		i;
 	int		j;
 	long	*nb;
-	t_stack *stack_a;
-	t_stack *stack_b;
 	t_stack *node;
 
 	i = 1;
 	j = 0;
-	stack_a = NULL;
-	stack_b = NULL;
 	nb = conv(str, count);
 	while (i <= count)
 	{
 		node = new(nb[j]);
-		add_back(&stack_a, node);
+		add_back(stack_a, node);
 		j++;
 		i++;
 	}
-	sort_stack(&stack_a, &stack_b);
+	sort_stack(stack_a, stack_b);
+	free(nb);
+	free_stack(stack_a);
+	//free_stack(stack_b);
 }

@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/04 17:48:00 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:44:55 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ long	*conv(char **str, int count);
 int		ordered(long *nb, int count);
 
 //utils.c
+void	free_stack(t_stack **stack);
 //write
 void	wrerror(void);
 
@@ -55,7 +56,7 @@ int		size(t_stack *lst);
 //utils.c
 
 //stacks.c
-void	init (char **str, int count);
+void	init (char **str, int count, t_stack **stack_a, t_stack **stack_b);
 void	sort_stack(t_stack **a, t_stack **b);
 void	sort_two(t_stack **a);
 

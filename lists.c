@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/04 17:40:31 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:45:27 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	printlst(t_stack *node)
 		printf("%d -> ", node->value);
 		node = node->next;
 	}
-	//free(node);
+	free_stack(&node);
 }
 /*
 	printf("\nA\n");
@@ -130,5 +130,6 @@ printlst(stack_a);
 printf("\nB\n");
 printlst(stack_b);
 */
+
 
 

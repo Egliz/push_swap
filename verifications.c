@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:44:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/02/13 15:56:52 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:05:37 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ int ordered(long *nb, int count)
 			j++;
 		}
 		else
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -105,18 +103,20 @@ int verification (char **str, int count)
 		free(nb);
 		wrerror();
 	}
-	if(!is_number(str))
+	else if(!is_number(str))
 		wrerror();
-	if(duplicate(nb, count) == 0)
+	else if(duplicate(nb, count) == 0)
 	{
 		free(nb);
 		wrerror();
 	}
-	if(ordered(nb, count) == 0)
+	else if(ordered(nb, count) == 0)
 	{
 		free(nb);
 		wrerror();
 	}
+	else
+		free(nb);
 	return (1);
 }
 
