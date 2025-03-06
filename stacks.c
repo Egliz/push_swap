@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/05 21:05:59 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:04:55 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,44 +50,65 @@ void sort_three(t_stack **a)//NO + LINEAS
 void sort_bigg(t_stack **a, t_stack **b)
 {
 	int num;
+	//int len;
 	
 	printlst(*a);
 	printf("\n\n");
-	pb(b, a);
-	pb(b, a);
+	if(size(*a) > 3)
+		pb(b, a);
+	if(size(*a) > 3)
+		pb(b, a);
 	printlst(*b);
 	printf("\n\n");
 	num = (*a)->value;
+	//len = size(*a);
 	if(num > max_value(*b))
 	{
 		while((*b)->value != max_value(*b))
 			rb(b);
+		printf("\naqui si\n");
 	}
-	else if(num < min_value(*b))
+	if(num < min_value(*b))
 	{
 		while((*b)->value != min_value(*b))
 			rrb(b);
 	}
 	else
-		llamar a correct_position(*b, num);
+		correct_position(b, num);
+//	if(size(*a) > 3)
+	//pb(b, a);
+//	if(size(*a)== 3)
+//		sort_stack(a, b);
+	printf("\nA\n");
 	printlst(*a);
-	printf("\notra\n");
+	printf("\nB\n");
 	printlst(*b);
-
 }
+
 void sort_stack(t_stack **a, t_stack **b)
 {
 	int len;
 
-	len = size(*a);//con el len dentro para que se actualice cada vez, posible while para que vaya entrando hasta que no sea nulo, y asi poder ordenar los numeros que queden en A si son 2 o 3
-	if(len == 2)
-		sort_two(a);// implemento sa, en sort_two
-	else if(len == 3)
-		sort_three(a);//llo necesario para 3 nodos, en sort_three
-	if(len > 3)
-		sort_bigg(a, b);//si hay mas de 3, hago pb en sort bigg
-	else
-		printlst(*b);//borrar despues que vea que las funciones anteriores funcionan
+	len = size(*a);
+
+	//con el len dentro para que se actualice cada vez, posible while para que vaya entrando hasta que no sea nulo, y asi poder ordenar los numeros que queden en A si son 2 o 3
+		if(len == 2)
+			sort_two(a);// implemento sa, en sort_two
+		else if(len == 3)
+		{
+			sort_three(a);//llo necesario para 3 nodos, en sort_three
+			printf("\nsoy 3\n");
+		}
+		else if(len > 3)//va un else
+		{
+			while(size(*a) > 3)
+				sort_bigg(a, b);//si hay mas de 3, hago pb en sort bigg
+			printf("\nsoy bigg\n");
+		}
+		else
+			printf("\nalgo\n");//borrar despues que vea que las funciones anteriores funcionan
+//		(*a) = (*a)->next;
+//	}
 }
 
 

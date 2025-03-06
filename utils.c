@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/05 19:56:12 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:49:46 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,13 @@ int	max_value(t_stack *b)
 	int max; 
 
 	max = b->value;//el primero de B
-	while(b->next != NULL)
+	while(b != NULL)
 	{
 		if(b->value > max)
 			max = b ->value;
 		b = b->next;
 	}
+	printf("\n%d max\n", max);
 	return (max);
 }
 
@@ -69,12 +70,13 @@ int	min_value(t_stack *b)
 	int min;
 
 	min = b->value;
-	while(b->next != NULL)
+	while(b != NULL)
 	{	
 		if(b->value < min)
 			min = b->value;
 		b = b->next;
 	}
+	printf("\n %dmin \n", min);
 	return (min);
 }
 

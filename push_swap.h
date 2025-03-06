@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/05 20:57:35 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:39:05 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int		ordered(long *nb, int count);
 void	free_stack(t_stack **stack);
 int		max_value(t_stack *b);
 int		min_value(t_stack *b);
+
+//utils2.c
+void	correct_position(t_stack **b, int num);
 //write
 void	wrerror(void);
 
