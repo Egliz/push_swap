@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/06 16:04:55 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:58:42 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,65 +50,97 @@ void sort_three(t_stack **a)//NO + LINEAS
 void sort_bigg(t_stack **a, t_stack **b)
 {
 	int num;
-	//int len;
-	
+//	int max;
+//	int min;
+//	int correct;
+//	int len;
+
+	printf("\n\n");
 	printlst(*a);
 	printf("\n\n");
-	if(size(*a) > 3)
+	while((size(*a)) > 3 && (size(*b)) < 2)
 		pb(b, a);
-	if(size(*a) > 3)
-		pb(b, a);
+	printf("\nB\n");
 	printlst(*b);
 	printf("\n\n");
-	num = (*a)->value;
-	//len = size(*a);
-	if(num > max_value(*b))
+	while((size(*a)) > 3)
 	{
-		while((*b)->value != max_value(*b))
-			rb(b);
-		printf("\naqui si\n");
+		//if(*a == NULL)
+		//	break;
+		num = (*a)->value;
+	//	len = size(*b);
+		if(num > max_value(*b))
+		{
+			//max = find_max_position(*b);
+			//rotate_to_position(b, max, len);
+			while((*b)->value != max_value(*b))
+				rb(b);
+			printf("\nB\n");
+			printlst(*b);
+			printf("\nA\n");
+			printlst(*a);
+			printf("\naqui si\n");
+		}
+		else if(num < min_value(*b))
+		{
+			//min = find_min_position(*b);
+			//rotate_to_position(b, min, len);
+			while((*b)->value != min_value(*b))
+				rrb(b);
+			printf("\nB\n");
+			printlst(*b);
+			printf("\nA\n");
+			printlst(*a);
+			printf("\nAqui\n");
+		}
+		else
+		{
+			//correct = find_correct_position(*b, num);
+			//rotate_to_position(b, correct,len);
+			printf("\nCorP\n");
+			correct_position(b, num);
+			printf("\nB\n");
+			printlst(*b);
+			printf("\nA\n");
+			printlst(*a);
+		}
+		pb(b, a);
 	}
-	if(num < min_value(*b))
-	{
-		while((*b)->value != min_value(*b))
-			rrb(b);
-	}
-	else
-		correct_position(b, num);
-//	if(size(*a) > 3)
-	//pb(b, a);
-//	if(size(*a)== 3)
-//		sort_stack(a, b);
+	if(size(*a)== 3)
+		sort_three(a);
+	assign_index(a);
+	assign_index(b);
+	printf("\n\n");
 	printf("\nA\n");
 	printlst(*a);
 	printf("\nB\n");
 	printlst(*b);
+	printf("\n\n");
 }
 
 void sort_stack(t_stack **a, t_stack **b)
 {
-	int len;
+	//int len;
 
-	len = size(*a);
+	//len = size(*a);
 
-	//con el len dentro para que se actualice cada vez, posible while para que vaya entrando hasta que no sea nulo, y asi poder ordenar los numeros que queden en A si son 2 o 3
-		if(len == 2)
-			sort_two(a);// implemento sa, en sort_two
-		else if(len == 3)
-		{
-			sort_three(a);//llo necesario para 3 nodos, en sort_three
-			printf("\nsoy 3\n");
-		}
-		else if(len > 3)//va un else
-		{
-			while(size(*a) > 3)
-				sort_bigg(a, b);//si hay mas de 3, hago pb en sort bigg
-			printf("\nsoy bigg\n");
-		}
-		else
-			printf("\nalgo\n");//borrar despues que vea que las funciones anteriores funcionan
-//		(*a) = (*a)->next;
-//	}
+	while((size(*a)) > 3)
+	{
+		sort_bigg(a, b);
+		assign_index(a);
+	}
+	if(size(*a) == 2)
+	{
+		sort_two(a);
+		assign_index(a);
+	}
+	else if(size(*a) == 3)
+	{
+		sort_three(a);
+		assign_index(a);
+	}
+	printf("\nalgo\n");//borrar despues que vea que las funciones anteriores funcionan
+
 }
 
 
@@ -127,9 +159,11 @@ void init(char **str, int count, t_stack **stack_a, t_stack **stack_b)//NO + LIN
 	{
 		node = new(nb[j]);
 		add_back(stack_a, node);
+		//assign_index(stack_a);
 		j++;
 		i++;
 	}
+	assign_index(stack_a);
 	sort_stack(stack_a, stack_b);
 	free(nb);
 	free_stack(stack_a);

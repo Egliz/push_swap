@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/06 13:49:46 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/10 14:02:03 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ int	max_value(t_stack *b)
 			max = b ->value;
 		b = b->next;
 	}
-	printf("\n%d max\n", max);
+	//printf("\n%d max\n", max);
 	return (max);
 }
+
 
 int	min_value(t_stack *b)
 {
@@ -76,7 +77,81 @@ int	min_value(t_stack *b)
 			min = b->value;
 		b = b->next;
 	}
-	printf("\n %dmin \n", min);
+	//printf("\n %dmin \n", min);
 	return (min);
 }
 
+int find_max_position(t_stack *b)
+{
+    int max_value;
+    int max_position;
+    int current_position;
+    t_stack *tmp;
+
+    if (!b)
+        return (-1); // Si `b` está vacía, retorna -1
+
+    tmp = b;
+    max_value = tmp->value;
+    max_position = 0;
+    current_position = 0;
+
+    // Recorrer la pila para encontrar el valor máximo y su posición
+    while (tmp != NULL)
+    {
+        if (tmp->value > max_value)
+        {
+            max_value = tmp->value;
+            max_position = current_position;
+        }
+        current_position++;
+        tmp = tmp->next;
+    }
+
+    return (max_position);
+}
+
+int find_min_position(t_stack *b)
+{
+    int min_value;
+    int min_position;
+    int current_position;
+    t_stack *tmp;
+
+    if (!b)
+        return (-1); // Si `b` está vacía, retorna -1
+
+    tmp = b;
+    min_value = tmp->value;
+    min_position = 0;
+    current_position = 0;
+
+    // Recorrer la pila para encontrar el valor mínimo y su posición
+    while (tmp != NULL)
+    {
+        if (tmp->value < min_value)
+        {
+            min_value = tmp->value;
+            min_position = current_position;
+        }
+        current_position++;
+        tmp = tmp->next;
+    }
+
+    return (min_position);
+}
+
+void rotate_to_position(t_stack **b, int position, int len)
+{
+    if (position <= len / 2)
+    {
+        while (position-- > 0)
+            rb(b); // Rotar hacia arriba
+    }
+    else
+    {
+        position = len - position;
+        while (position-- > 0)
+            rrb(b); // Rotar hacia abajo
+    }
+}

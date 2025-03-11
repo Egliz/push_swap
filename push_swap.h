@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/06 12:39:05 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:33:27 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct s_stack
 {
 	int			value;
-	//int			index;
+	int			index;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -36,11 +36,19 @@ int		ordered(long *nb, int count);
 
 //utils.c
 void	free_stack(t_stack **stack);
-int		max_value(t_stack *b);
-int		min_value(t_stack *b);
+int		find_max_position(t_stack *b);
+int		find_min_position(t_stack *b);
 
+
+int	max_value(t_stack *b);
+int	min_value(t_stack *b);
 //utils2.c
 void	correct_position(t_stack **b, int num);
+void	assign_index(t_stack **stack);
+//int find_correct_position(t_stack *b, int num);
+
+//void rotate_to_position(t_stack **b, int position, int len);
+
 //write
 void	wrerror(void);
 
