@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:55:22 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/11 16:01:15 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:29:53 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	printlst(t_stack *node)
 	//printf("esta en lists.c\n");
 	while (node != NULL)
 	{
-		printf("\%d", node->value);
-		printf("\n[%d]\n\n", node->index);
+		printf("%d[%d] -> ", node->value, node->index);
+		//printf("\n[%d]\n\n", node->index);
 		node = node->next;
 	}
 	free_stack(&node);

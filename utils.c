@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/10 14:02:03 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:20:51 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,4 +154,96 @@ void rotate_to_position(t_stack **b, int position, int len)
         while (position-- > 0)
             rrb(b); // Rotar hacia abajo
     }
+}
+
+
+////////////**//////////
+
+
+/*int get_cost(t_stack *a, int l, int i) // int i)
+{
+	t_stack *tmp;
+	int		cost;
+
+	tmp = a;
+	cost = 0;
+	while(tmp)
+	{
+		if(i < l / 2)
+			cost = i;
+		else
+			cost = l - i;
+		tmp = tmp->next;
+		i++;
+	}
+	return (cost);
+}
+*/
+
+
+int get_cost(t_stack *a, int l, int i)
+{
+    int cost;
+
+    if (i < l / 2)
+        cost = i;  // Costo para mover hacia adelante
+    else
+        cost = l - i;  // Costo para mover hacia atrás
+
+    return cost;
+}
+
+
+int	get_pos(t_stack **b, int node) //int size_b)
+{
+	t_stack *tmp;
+	int i;
+
+	i = 0;
+	tmp = *b;
+	while(tmp)
+	{
+		if(tmp->value >= node)
+		{
+			return(i);
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+
+//ejecutar esta antes de hacer pb(a, b);
+
+void	ft_rotation(t_stack **a, t_stack **b)
+{
+	int d_a;
+	int d_b;
+	int pos_b;
+
+	pos_b = get_pos(b, (*a)->value); //size(*b));
+	printf("Posición de B para el valor de A (%d): %d\n", (*a)->value, pos_b);
+	d_a = get_cost(*a, size(*a), 0);
+	d_b = get_cost(*b, size(*b), pos_b);
+	printf("Coste para A: %d, Coste para B: %d\n", d_a, d_b);
+
+	
+	if(d_a <= size(*a) / 2 && d_b <= size(*b) / 2)
+		rr(a, b);
+	else if (d_a > size(*a) / 2 && d_b > size(*b) / 2 )
+		rrr(a, b);
+	else if(d_a <= size(*a) / 2 && d_b > size(*b) / 2)
+	{
+		ra(a);
+		rrb(b);
+	}
+	else if (d_a > size(*a) / 2 && d_b <= size(*b) / 2)
+	{
+		rra(a);
+		rb(b);
+	}
+//	else if(d_a == size(*a) / 2 && d_b == size(*b) / 2)
+//		rr(a, b);//el ultimo else if podria, sobrar pq si no es ninguan de las anteriores, 
+		//es esta, actual 25 lineas
 }

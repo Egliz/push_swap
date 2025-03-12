@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/11 15:58:42 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:37:38 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ void sort_three(t_stack **a)//NO + LINEAS
 
 void sort_bigg(t_stack **a, t_stack **b)
 {
-	int num;
-//	int max;
-//	int min;
-//	int correct;
-//	int len;
-
 	printf("\n\n");
 	printlst(*a);
 	printf("\n\n");
@@ -65,45 +59,7 @@ void sort_bigg(t_stack **a, t_stack **b)
 	printf("\n\n");
 	while((size(*a)) > 3)
 	{
-		//if(*a == NULL)
-		//	break;
-		num = (*a)->value;
-	//	len = size(*b);
-		if(num > max_value(*b))
-		{
-			//max = find_max_position(*b);
-			//rotate_to_position(b, max, len);
-			while((*b)->value != max_value(*b))
-				rb(b);
-			printf("\nB\n");
-			printlst(*b);
-			printf("\nA\n");
-			printlst(*a);
-			printf("\naqui si\n");
-		}
-		else if(num < min_value(*b))
-		{
-			//min = find_min_position(*b);
-			//rotate_to_position(b, min, len);
-			while((*b)->value != min_value(*b))
-				rrb(b);
-			printf("\nB\n");
-			printlst(*b);
-			printf("\nA\n");
-			printlst(*a);
-			printf("\nAqui\n");
-		}
-		else
-		{
-			//correct = find_correct_position(*b, num);
-			//rotate_to_position(b, correct,len);
-			printf("\nCorP\n");
-			correct_position(b, num);
-			printf("\nB\n");
-			printlst(*b);
-			printf("\nA\n");
-			printlst(*a);
-		}
+		ft_rotation(a, b);
 		pb(b, a);
 	}
 	if(size(*a)== 3)
@@ -120,10 +76,6 @@ void sort_bigg(t_stack **a, t_stack **b)
 
 void sort_stack(t_stack **a, t_stack **b)
 {
-	//int len;
-
-	//len = size(*a);
-
 	while((size(*a)) > 3)
 	{
 		sort_bigg(a, b);
@@ -159,7 +111,6 @@ void init(char **str, int count, t_stack **stack_a, t_stack **stack_b)//NO + LIN
 	{
 		node = new(nb[j]);
 		add_back(stack_a, node);
-		//assign_index(stack_a);
 		j++;
 		i++;
 	}
