@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/12 20:16:22 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:15:43 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		find_min_position(t_stack *b);
 //////
 void	ft_rotation(t_stack **a, t_stack **b);
 int		get_pos(t_stack **b, int node); //int size_b);
-int		get_cost(t_stack *a, int l, int i);
+int		get_cost(t_stack *a, t_stack *b, int index_a, int l_a, int l_b);
 ///////
 
 int	max_value(t_stack *b);

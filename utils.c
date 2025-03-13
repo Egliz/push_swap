@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/12 20:20:51 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:15:49 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,8 +159,8 @@ void rotate_to_position(t_stack **b, int position, int len)
 
 ////////////**//////////
 
-
-/*int get_cost(t_stack *a, int l, int i) // int i)
+/*
+int get_cost(t_stack *a, int l, int i) // int i)
 {
 	t_stack *tmp;
 	int		cost;
@@ -177,10 +177,37 @@ void rotate_to_position(t_stack **b, int position, int len)
 		i++;
 	}
 	return (cost);
+}*/
+
+
+
+int get_cost(t_stack *a, t_stack *b, int index_a, int l_a, int l_b)
+{
+    int cost_a; // Costo para llevar el número al tope de STACK_A
+    int cost_b; // Costo para llevar la posición correcta al tope de STACK_B
+    int target_pos; // Posición correcta en STACK_B
+
+    // Calcular el costo en STACK_A
+    if (index_a <= l_a / 2)
+        cost_a = index_a; // Rotaciones hacia arriba
+    else
+        cost_a = l_a - index_a; // Rotaciones hacia abajo
+
+    // Encontrar la posición correcta en STACK_B
+    target_pos = get_pos(&b, a->value);
+
+    // Calcular el costo en STACK_B
+    if (target_pos <= l_b / 2)
+        cost_b = target_pos; // Rotaciones hacia arriba
+    else
+        cost_b = l_b - target_pos; // Rotaciones hacia abajo
+
+    // Retornar el costo total
+    return (cost_a + cost_b);
 }
-*/
 
 
+/*
 int get_cost(t_stack *a, int l, int i)
 {
     int cost;
@@ -191,31 +218,51 @@ int get_cost(t_stack *a, int l, int i)
         cost = l - i;  // Costo para mover hacia atrás
 
     return cost;
-}
+}*/
 
 
-int	get_pos(t_stack **b, int node) //int size_b)
-{
-	t_stack *tmp;
-	int i;
 
-	i = 0;
-	tmp = *b;
-	while(tmp)
-	{
-		if(tmp->value >= node)
-		{
-			return(i);
-		}
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
-}
 
 
 //ejecutar esta antes de hacer pb(a, b);
 
+void ft_rotation(t_stack **a, t_stack **b)
+{
+    int d_a;       // Costo para llevar el número al tope de STACK_A
+    int d_b;       // Costo para llevar la posición correcta al tope de STACK_B
+    int pos_b;     // Posición correcta en STACK_B
+    int size_a;    // Tamaño de STACK_A
+    int size_b;    // Tamaño de STACK_B
+
+    size_a = size(*a);
+    size_b = size(*b);
+
+    // Encontrar la posición correcta en STACK_B
+    pos_b = get_pos(b, (*a)->value);
+
+    // Calcular el costo en STACK_A y STACK_B
+    d_a = get_cost(*a, *b, 0, size_a, size_b); // Costo para STACK_A
+    d_b = get_cost(*b, *a, pos_b, size_b, size_a); // Costo para STACK_B
+
+    // Determinar las rotaciones necesarias
+    if (d_a <= size_a / 2 && d_b <= size_b / 2)
+        rr(a, b); // Rotación simultánea hacia arriba
+    else if (d_a > size_a / 2 && d_b > size_b / 2)
+        rrr(a, b); // Rotación simultánea hacia abajo
+    else if (d_a <= size_a / 2 && d_b > size_b / 2)
+    {
+        ra(a); // Rotación hacia arriba en STACK_A
+        rrb(b); // Rotación hacia abajo en STACK_B
+    }
+    else if (d_a > size_a / 2 && d_b <= size_b / 2)
+    {
+        rra(a); // Rotación hacia abajo en STACK_A
+        rb(b); // Rotación hacia arriba en STACK_B
+    }
+}
+
+
+/*
 void	ft_rotation(t_stack **a, t_stack **b)
 {
 	int d_a;
@@ -246,4 +293,55 @@ void	ft_rotation(t_stack **a, t_stack **b)
 //	else if(d_a == size(*a) / 2 && d_b == size(*b) / 2)
 //		rr(a, b);//el ultimo else if podria, sobrar pq si no es ninguan de las anteriores, 
 		//es esta, actual 25 lineas
+}*/
+/*
+int	get_pos(t_stack **b, int node) //int size_b)
+{
+	t_stack *tmp;
+	int i;
+
+	i = 0;
+	tmp = *b;
+	while(tmp)
+	{
+		if(tmp->value >= node)
+		{
+			return(i);
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}*/
+
+
+int get_pos(t_stack **b, int node)
+{
+    t_stack *tmp;
+    int i;
+
+    i = 0;
+    tmp = *b;
+
+    // Si STACK_B está vacío, el número debe ir al tope
+    if (!tmp)
+        return (0);
+
+    // Recorrer STACK_B para encontrar la posición correcta
+    while (tmp)
+    {
+        // Si el número es mayor que el actual y menor que el siguiente
+        if (node > tmp->value && (!tmp->next || node < tmp->next->value))
+            return (i + 1);
+
+        // Si el número es el nuevo máximo
+        if (node > tmp->value && !tmp->next)
+            return (0);
+
+        tmp = tmp->next;
+        i++;
+    }
+
+    // Si el número es el nuevo mínimo, debe ir al final
+    return (i);
 }

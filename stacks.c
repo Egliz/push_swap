@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/12 19:37:38 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:05:26 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void sort_bigg(t_stack **a, t_stack **b)
 	printf("\n\n");
 	while((size(*a)) > 3 && (size(*b)) < 2)
 		pb(b, a);
+	assign_index(a);
+	assign_index(b);
 	printf("\nB\n");
 	printlst(*b);
 	printf("\n\n");
@@ -61,6 +63,8 @@ void sort_bigg(t_stack **a, t_stack **b)
 	{
 		ft_rotation(a, b);
 		pb(b, a);
+		assign_index(a);
+		assign_index(b);
 	}
 	if(size(*a)== 3)
 		sort_three(a);
@@ -78,18 +82,18 @@ void sort_stack(t_stack **a, t_stack **b)
 {
 	while((size(*a)) > 3)
 	{
-		sort_bigg(a, b);
 		assign_index(a);
+		sort_bigg(a, b);
 	}
 	if(size(*a) == 2)
 	{
-		sort_two(a);
 		assign_index(a);
+		sort_two(a);
 	}
 	else if(size(*a) == 3)
 	{
-		sort_three(a);
 		assign_index(a);
+		sort_three(a);
 	}
 	printf("\nalgo\n");//borrar despues que vea que las funciones anteriores funcionan
 
