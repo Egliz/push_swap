@@ -6,7 +6,7 @@
 #    By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 12:19:41 by emorillo          #+#    #+#              #
-#    Updated: 2025/03/06 12:33:14 by emorillo         ###   ########.fr        #
+#    Updated: 2025/03/14 16:19:21 by emorillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g 
 
 CLEAR = rm -rf
 

@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/13 19:05:26 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:40:25 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ void sort_three(t_stack **a)//NO + LINEAS
 	printlst(*a);
 }
 
+void	print_stacks(t_stack **a, t_stack **b)
+{
+	printlst(*a);
+	printf("\n\n");
+	printlst(*b);
+	printf("\n\n");
+
+}
+
 void sort_bigg(t_stack **a, t_stack **b)
 {
 	printf("\n\n");
@@ -68,8 +77,15 @@ void sort_bigg(t_stack **a, t_stack **b)
 	}
 	if(size(*a)== 3)
 		sort_three(a);
+	printf("\n\n");
+	printf("\nA\n");
+	printlst(*a);
+	printf("\nB\n");
+	printlst(*b);
+	printf("\n\n");
 	assign_index(a);
 	assign_index(b);
+	rotate_b(b);
 	printf("\n\n");
 	printf("\nA\n");
 	printlst(*a);
@@ -123,4 +139,20 @@ void init(char **str, int count, t_stack **stack_a, t_stack **stack_b)//NO + LIN
 	free(nb);
 	free_stack(stack_a);
 	//free_stack(stack_b);
+}
+
+void rotate_b (t_stack **b)
+{
+	t_stack *tmp;
+
+	tmp = *b;
+
+	while(tmp->value > tmp->next->value || tmp->next->value == max_value(*b))
+		{
+			rb(b);
+			tmp = *b;
+			if (tmp->value == max_value(*b))
+				return ;
+		}
+	
 }
