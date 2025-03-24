@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/14 18:40:25 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/24 19:57:12 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void sort_bigg(t_stack **a, t_stack **b)
 	printlst(*a);
 	printf("\nB\n");
 	printlst(*b);
-	printf("\n\n");
+	printf("\n\n");	
+	rotate_b(b);
 	assign_index(a);
 	assign_index(b);
-	rotate_b(b);
 	printf("\n\n");
 	printf("\nA\n");
 	printlst(*a);
