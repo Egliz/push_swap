@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/14 18:31:44 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/30 17:59:06 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ int get_cost(t_stack *a, int l, int i) // int i)
 }*/
 
 
-
+//				7        6
 int get_cost(int l, int index)
 {
 	int	cost;
@@ -188,8 +188,9 @@ int get_cost(int l, int index)
     if (index <= l / 2)
         cost = index; // Rotaciones hacia arriba
     else
-        cost = l - index; // Rotaciones hacia abajo
-
+      {  cost = l - index; // Rotaciones hacia abajo
+	  }
+//	printf("\nReturnCost %i\n", cost);
     // Retornar el costo total
     return (cost);
 }
@@ -218,6 +219,7 @@ int get_max_sub_n(t_stack **stack, int n)
 	max = -2147483648;
 	while (node)
 	{
+		//printf("Comparing: node->value = %d, n = %d, current max = %d\n", node->value, n, max);
 		if (node->value < n && max < node->value)
 			max = node->value;
 		node = node->next;
@@ -256,26 +258,28 @@ int	get_index_cheapest(t_stack **a, t_stack **b)
 	int		cost;
 	int		new_cost;
 	t_stack	*node_a;
-	int		index;
+	int		index_a;
+	int		index_b;
 
 	node_a = *a;
 	cost = 10000000;
 	while (node_a)
 	{
 		//	get the index of b.
-		index = get_pos_of_b(b, node_a->value);
-		new_cost = get_cost(size(*b), index);
+		index_b = get_pos_of_b(b, node_a->value);
+		new_cost = get_cost(size(*b), index_b);
 		//	get the index of a.
-		index = node_a->index;
-		new_cost += get_cost(size(*a), index);
+		index_a = node_a->index;
+		new_cost += get_cost(size(*a), index_a);
 		if (new_cost < cost)
 		{
-			index = node_a->index;
+			//index = node_a->index;
 			cost = new_cost;
 		}
 		node_a = node_a->next;
 	}
-	return (index);
+	printf("\nChpst index %i\n", index_a);
+	return (index_a);
 }
 
 t_stack	*ft_get_node(t_stack **stack, int index)
@@ -308,9 +312,13 @@ void ft_rotation(t_stack **a, t_stack **b)
 	int cost;
 
 	index_a = get_index_cheapest(a, b);
+	printf("\nindexA %i\n", index_a);
 	index_b = get_pos_of_b(b, ft_get_node(a, index_a)->value);
+	printf("\nindexB %i\n", index_b);
 
 	cost = get_cost(size(*a), index_a);
+	printf("\ncostA %i\n", cost);
+	printf("\nSizeA %i\n", size(*a));
 	if (index_a <= size(*a) / 2)
 	{
 		i = 0;
@@ -331,6 +339,7 @@ void ft_rotation(t_stack **a, t_stack **b)
 	}
 
 	cost = get_cost(size(*b), index_b);
+	printf("costB %i\n", cost);
 	if (index_b <= size(*b) / 2)
 	{
 		i = 0;

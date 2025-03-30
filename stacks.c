@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/24 19:57:12 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/03/30 18:29:44 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	print_stacks(t_stack **a, t_stack **b)
 
 void sort_bigg(t_stack **a, t_stack **b)
 {
+	printf("\nA\n");
 	printf("\n\n");
 	printlst(*a);
 	printf("\n\n");
@@ -67,10 +68,18 @@ void sort_bigg(t_stack **a, t_stack **b)
 	assign_index(b);
 	printf("\nB\n");
 	printlst(*b);
+	printf("\nA\n");
+	printlst(*a);
 	printf("\n\n");
 	while((size(*a)) > 3)
 	{
 		ft_rotation(a, b);
+		assign_index(a);
+		assign_index(b);
+		printf("\nA\n");
+		printlst(*a);
+		printf("\nB\n");
+		printlst(*b);
 		pb(b, a);
 		assign_index(a);
 		assign_index(b);
