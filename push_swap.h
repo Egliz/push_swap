@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/24 19:26:54 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:28:50 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdbool.h>
 # include "include/libft/libft.h"
+
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 typedef struct s_stack
 {
 	int			value;
 	int			index;
+	int			cheap;
 	struct s_stack	*next;
 }					t_stack;
 
@@ -48,7 +53,7 @@ t_stack *ft_get_node(t_stack **stack, int index);
 
 ///////
 
-int	max_value(t_stack *b);
+int	max_value(t_stack **b);
 int	min_value(t_stack *b);
 //utils2.c
 void	correct_position(t_stack **b, int num);

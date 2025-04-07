@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/03/30 17:59:06 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:29:12 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void free_stack(t_stack **stack)
         *stack = tmp;
     }
 }
-
+/*///////////////
 int	max_value(t_stack *b)
 {
 	int max; 
@@ -63,9 +63,21 @@ int	max_value(t_stack *b)
 	}
 	//printf("\n%d max\n", max);
 	return (max);
+}*//////////////
+
+int max_value(t_stack **b)
+{
+    t_stack *tmp = *b;
+    int max = tmp->value;
+    
+    while (tmp)
+    {
+        if (tmp->value > max)
+            max = tmp->value;
+        tmp = tmp->next;
+    }
+    return (max);
 }
-
-
 int	min_value(t_stack *b)
 {
 	int min;
@@ -180,7 +192,7 @@ int get_cost(t_stack *a, int l, int i) // int i)
 }*/
 
 
-//				7        6
+//				2       1
 int get_cost(int l, int index)
 {
 	int	cost;
@@ -190,7 +202,7 @@ int get_cost(int l, int index)
     else
       {  cost = l - index; // Rotaciones hacia abajo
 	  }
-//	printf("\nReturnCost %i\n", cost);
+	printf("\nCost %i\n", cost);
     // Retornar el costo total
     return (cost);
 }
@@ -209,7 +221,7 @@ int get_cost(t_stack *a, int l, int i)
     return cost;
 }*/
 
-
+/*////////////////
 int get_max_sub_n(t_stack **stack, int n)
 {
 	t_stack	*node;
@@ -217,16 +229,50 @@ int get_max_sub_n(t_stack **stack, int n)
 
 	node = *stack;
 	max = -2147483648;
+	if(node == NULL)
+		return (max);
 	while (node)
 	{
 		//printf("Comparing: node->value = %d, n = %d, current max = %d\n", node->value, n, max);
-		if (node->value < n && max < node->value)
+		if (node->value < n && node->value > max)
 			max = node->value;
 		node = node->next;
 	}
+	printf("\nMax: %i\n", max);
 	return (max);
+}*/////////////////
+
+int get_max_sub_n(t_stack **b, int n)
+{
+    t_stack *tmp;
+    int max;
+    bool found = false;
+    
+    if (!*b)
+        return (0);
+    
+    tmp = *b;
+    max = INT_MIN; // Inicializar con mínimo valor posible
+    
+    while (tmp)
+    {
+        if (tmp->value < n && tmp->value > max)
+        {
+            max = tmp->value;
+            found = true;
+        }
+        tmp = tmp->next;
+    }
+    
+    if (!found) // Si no encontró ningún valor menor que node
+        return (max_value(b)); // Devolver el máximo absoluto
+    
+    return (max);
 }
 
+
+
+/*/////////
 int get_pos_of_b(t_stack **b, int node)
 {
     t_stack *tmp;
@@ -239,7 +285,7 @@ int get_pos_of_b(t_stack **b, int node)
 
     // Si STACK_B está vacío, el número debe ir al tope
     if (!tmp)
-        return (0);
+        return (-1);
 
     // Recorrer STACK_B para encontrar la posición correcta
     while (tmp)
@@ -250,9 +296,64 @@ int get_pos_of_b(t_stack **b, int node)
         i++;
     }
     // Si el número es el nuevo mínimo, debe ir al final
+	printf("\nPosOfB: %i\n", i);
     return (i);
 }
+*//////////////
 
+int get_pos_of_b(t_stack **b, int node)
+{
+    t_stack *tmp;
+    int     i;
+    int     max;
+    int     min;
+    int     max_pos;
+    int     min_pos;
+    
+    if (!*b) return 0;
+    
+    tmp = *b;
+    max = tmp->value;
+    min = tmp->value;
+    max_pos = 0;
+    min_pos = 0;
+    i = 0;
+    
+    // Encontrar máximo y mínimo en B
+    while (tmp)
+    {
+        if (tmp->value > max) {
+            max = tmp->value;
+            max_pos = i;
+        }
+        if (tmp->value < min) {
+            min = tmp->value;
+            min_pos = i;
+        }
+        tmp = tmp->next;
+        i++;
+    }
+    // node (num)  
+    // Si el número es mayor que el máximo, va después del máximo
+    if (node > max) return (max_pos);
+    // Si el número es menor que el mínimo, va después del mínimo
+    if (node < min) return (min_pos + 1) % size(*b);
+    
+    // Buscar posición entre dos números donde debe insertarse
+    tmp = *b;
+    i = 0;
+    while (tmp->next)
+    {
+        if (tmp->value > node && tmp->next->value < node)
+            return (i + 1);
+        tmp = tmp->next;
+        i++;
+    }
+    return 0;
+}
+
+
+/*//////////////////
 int	get_index_cheapest(t_stack **a, t_stack **b)
 {
 	int		cost;
@@ -262,7 +363,7 @@ int	get_index_cheapest(t_stack **a, t_stack **b)
 	int		index_b;
 
 	node_a = *a;
-	cost = 10000000;
+	cost = INT_MIN;
 	while (node_a)
 	{
 		//	get the index of b.
@@ -273,7 +374,7 @@ int	get_index_cheapest(t_stack **a, t_stack **b)
 		new_cost += get_cost(size(*a), index_a);
 		if (new_cost < cost)
 		{
-			//index = node_a->index;
+			index_a = node_a->index;
 			cost = new_cost;
 		}
 		node_a = node_a->next;
@@ -281,6 +382,81 @@ int	get_index_cheapest(t_stack **a, t_stack **b)
 	printf("\nChpst index %i\n", index_a);
 	return (index_a);
 }
+*////////
+
+int get_index_cheapest(t_stack **a, t_stack **b)
+{
+    int     cost;
+    int     new_cost;
+    t_stack *node_a;
+    int     cheapest_index;
+    int     index_b;
+    
+    node_a = *a;
+    cost = INT_MAX;
+    cheapest_index = 0;
+    while (node_a)
+    {
+        index_b = get_pos_of_b(b, node_a->value);
+        new_cost = get_cost(size(*b), index_b) + get_cost(size(*a), node_a->index);
+        
+        if (new_cost < cost)
+        {
+            cost = new_cost;
+            cheapest_index = node_a->index;
+        }
+        node_a = node_a->next;
+    }
+    return (cheapest_index);
+}
+
+
+/*
+int get_index_cheapest(t_stack **a, t_stack **b)
+{
+    //int cost;
+    int new_cost;
+    t_stack *node_a;
+    int index_a;
+    int index_b;
+    int cheapest_cost;
+    t_stack *cheapest_node;
+
+    node_a = *a;
+    cheapest_cost = INT_MAX;  // Inicializamos el costo más bajo a un valor muy alto
+    cheapest_node = NULL;  // No hemos encontrado un nodo más barato todavía
+
+    while (node_a)
+    {
+        // Obtener la posición del nodo en b
+        index_b = get_pos_of_b(b, node_a->value);
+        new_cost = get_cost(size(*b), index_b);  // Obtener el costo de b
+
+        // Obtener el índice de a y agregar el costo de a
+        index_a = node_a->index;
+        new_cost += get_cost(size(*a), index_a);  // Agregar el costo de a
+
+        // Si el costo total es más bajo que el actual, actualizamos
+        if (new_cost < cheapest_cost)
+        {
+            cheapest_cost = new_cost;
+            cheapest_node = node_a;  // Guardamos el nodo más barato
+        }
+
+        node_a = node_a->next;  // Pasamos al siguiente nodo
+    }
+
+    // Ahora que hemos recorrido todos los nodos, marcamos el nodo más barato
+    if (cheapest_node != NULL)
+    {
+        cheapest_node->cheap = 1;  // Marcamos este nodo como el más barato
+        index_a = cheapest_node->index;  // Tomamos su índice
+    }
+
+    printf("\nChpst index %i\n", index_a);  // Imprimimos el índice del nodo más barato
+    return (index_a);  // Retornamos el índice del nodo más barato
+}
+*/
 
 t_stack	*ft_get_node(t_stack **stack, int index)
 {
@@ -298,6 +474,7 @@ t_stack	*ft_get_node(t_stack **stack, int index)
 }
 
 //ejecutar esta antes de hacer pb(a, b);
+/*/////////////////
 void ft_rotation(t_stack **a, t_stack **b)
 {
 //    int d_a;       // Costo para llevar el número al tope de STACK_A
@@ -358,6 +535,46 @@ void ft_rotation(t_stack **a, t_stack **b)
 			i++;
 		}
 	}
+*////////////////
+
+void ft_rotation(t_stack **a, t_stack **b)
+{
+    int index_a = get_index_cheapest(a, b);
+    int index_b = get_pos_of_b(b, ft_get_node(a, index_a)->value);
+    int cost_a = get_cost(size(*a), index_a);
+    int cost_b = get_cost(size(*b), index_b);
+    
+    // Optimización: realizar rotaciones simultáneas cuando sea posible
+    while (cost_a > 0 && cost_b > 0 && 
+          ((index_a <= size(*a)/2 && index_b <= size(*b)/2) ||
+           (index_a > size(*a)/2 && index_b > size(*b)/2)))
+    {
+        if (index_a <= size(*a)/2 && index_b <= size(*b)/2) {
+            rr(a, b);
+            cost_a--;
+            cost_b--;
+        } else {
+            rrr(a, b);
+            cost_a--;
+            cost_b--;
+        }
+    }
+    
+    // Rotaciones restantes en A
+    while (cost_a-- > 0) {
+        if (index_a <= size(*a)/2) ra(a);
+        else rra(a);
+    }
+    
+    // Rotaciones restantes en B
+    while (cost_b-- > 0) {
+        if (index_b <= size(*b)/2) rb(b);
+        else rrb(b);
+    }
+    
+    // Finalmente hacer el push
+   // pb(a, b);
+}
 
 //    size_a = size(*a);
 //    size_b = size(*b);
@@ -385,7 +602,7 @@ void ft_rotation(t_stack **a, t_stack **b)
 //        rra(a); // Rotación hacia abajo en STACK_A
 //        rb(b); // Rotación hacia arriba en STACK_B
 //    }
-}
+//}
 
 
 /*
