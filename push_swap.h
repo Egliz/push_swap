@@ -24,9 +24,15 @@
 
 typedef struct s_stack
 {
+<<<<<<< HEAD
 	int				value;
 	int				index;
 	struct s_stack  *cheap;
+=======
+	int			value;
+	int			index;
+	int			cheap;//usar para omitir funciones
+>>>>>>> a30050ec114eb88fddf3401c7ab3dcc1b5f7c5cc
 	struct s_stack	*next;
 }					t_stack;
 
