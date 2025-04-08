@@ -324,11 +324,11 @@ int get_pos_of_b(t_stack **b, int node)
     while (tmp)
     {
         if (tmp->value > max) {// tmp->value cambiar por node(que es el 1ro de a)
-            max = tmp->value;
+            max = tmp->value;//quitar
             max_pos = i;
         }
         if (tmp->value < min) {
-            min = tmp->value;
+            min = tmp->value;//quitar
             min_pos = i;
         }
         tmp = tmp->next;
