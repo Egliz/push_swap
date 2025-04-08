@@ -323,7 +323,7 @@ int get_pos_of_b(t_stack **b, int node)
     // Encontrar máximo y mínimo en B
     while (tmp)
     {
-        if (tmp->value > max) {
+        if (tmp->value > max) {// tmp->value cambiar por node(que es el 1ro de a)
             max = tmp->value;
             max_pos = i;
         }
