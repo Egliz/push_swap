@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/08 16:27:51 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/08 22:40:00 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,18 +194,49 @@ int get_cost(t_stack *a, int l, int i) // int i)
 
 
 //				2       1
-int get_cost(int l, int index)
+int get_push_cost(t_stack *target,t_stack *node_a, int size_a, int size_b)
 {
-	int	cost;
+	int	cost_a;
+	int cost_b;
 
-    if (index <= l / 2)
-        cost = index; // Rotaciones hacia arriba
-    else
-      {  cost = l - index; // Rotaciones hacia abajo
-	  }
+	//MIRAR QUE A Y B NO SEAN NULOS
+	if(size_b / 2 < target->index)
+	{
+		cost_b = size_b - target->index;
+	}
+	else if(size_b / 2 > target->index)
+	{
+		cost_b = target->index;
+	}
+	if(size_a / 2 < node_a->index)
+	{
+		cost_a = size_a - node_a->index;
+	}
+	else if(size_a / 2 > node_a->index)
+	{
+		cost_a = node_a->index;
+	}
+	if(node_a->index == size_a / 2)
+	{
+		if(size_a % 2 != 0)
+		{
+			cost_a = node_a->index;
+		}
+		else
+			cost_a = size_a - node_a->index;
+	}
+	if(target->index == size_b / 2)
+	{
+		if(size_b % 2 != 0)
+		{
+			cost_b = target->index;
+		}
+		else
+			cost_b = size_b - target->index;
+	}
 	//printf("\nCost %i\n", cost);
     // Retornar el costo total
-    return (cost);
+    return (cost_a + cost_b);
 }
 
 
@@ -302,63 +333,61 @@ int get_pos_of_b(t_stack **b, int node)
 }
 *//////////////
 
-int get_pos_of_b(t_stack **b, int node)
+t_stack *get_pos_of_b(t_stack **b, t_stack *node)
 {
+//	int		i;
+	int		diff;
+	int		diff_two;
     t_stack *tmp;
-    int     i;
-    int     max;
-    int     min;
-    int     max_pos;
-    int     min_pos;
+   /* t_stack *max;
+    t_stack *min;
+    t_stack *max_pos;
+    t_stack *min_pos;
+    */
+    if (!*b || !node)
+		return (0);
     
-    if (!*b) return 0;
-    
+	diff_two = INT_MAX;
     tmp = *b;
-    max = tmp->value;
-    min = tmp->value;
-    max_pos = 0;
-    min_pos = 0;
-    i = 0;
+   // max = tmp->value;
+   // min = tmp->value;
+   // max_pos = 0;
+   // min_pos = 0;
+   // i = 0;
     
     // Encontrar máximo y mínimo en B
     while (tmp)
     {
-        if (tmp->value > max) {
-            max = tmp->value;
-            max_pos = i;
-        }
-        if (tmp->value < min) {
-            min = tmp->value;
-            min_pos = i;
-        }
-        tmp = tmp->next;
-        i++;
+		if(tmp->value < node->value)
+		{
+			diff = node->value - tmp->value;
+			if(diff < diff_two)
+			{
+				diff_two = diff;
+				node->cheap = tmp;
+			}
+		}
+		tmp = tmp->next;
     }
-    // node (num)  
-    // Si el número es mayor que el máximo, va después del máximo
-    if (node > max)
+	if(diff_two == INT_MAX)
 	{
-		printf("\nFt get_pos_of_b. Pos=%i\n", max_pos);
-		return (max_pos);
+		diff_two = 0;
+		while(tmp)
+		{
+			if(tmp->value > node->value)
+			{	
+				diff = tmp->value - node->value;//MIRAR NEGATIVOS
+				if(diff_two < diff)
+				{
+					diff_two = diff;
+					node->cheap = tmp;
+				}
+			}
+			tmp = tmp->next;
+		}
 	}
-    // Si el número es menor que el mínimo, va después del mínimo
-    if (node < min)
-	{
-		
-		printf("\nFt get_pos_of_b. Pos=%i\n", min_pos);
-		return (min_pos + 1) % size(*b);
-    }
-    // Buscar posición entre dos números donde debe insertarse
-    tmp = *b;
-    i = 0;
-    while (tmp->next)
-    {
-        if (tmp->value > node && tmp->next->value < node)
-            return (i + 1);
-        tmp = tmp->next;
-        i++;
-    }
-    return 0;
+	printf("\ntarget: %i\n", node->cheap->value);
+	return (node->cheap);
 }
 
 
@@ -393,31 +422,28 @@ int	get_index_cheapest(t_stack **a, t_stack **b)
 }
 *////////
 
-int get_index_cheapest(t_stack **a, t_stack **b)
+t_stack *get_index_cheapest(t_stack **a, t_stack **b)
 {
-    int     cost;
-    int     new_cost;
+    //int     cost;
+   // int     new_cost;
     t_stack *node_a;
-    int     cheapest_index;
-    int     index_b;
-    
+    //int     cheapest_index;
+    //int     index_b;
+    int		i;
+	t_stack *target;
+
+	i = 0;
     node_a = *a;
-    cost = INT_MAX;
-    cheapest_index = 0;
+    //cost = INT_MAX;
+    //cheapest_index = 0;
     while (node_a)
     {
-        index_b = get_pos_of_b(b, node_a->value);
-        new_cost = get_cost(size(*b), index_b) + get_cost(size(*a), node_a->index);
-        
-        if (new_cost < cost)
-        {
-            cost = new_cost;
-            cheapest_index = node_a->index;
-        }
-        node_a = node_a->next;
-    }
-	printf("\nFt get_index_cheapest. Cheapest=%i\n", cheapest_index);
-    return (cheapest_index);
+		i++;
+		printf("\niteracion num= %i\n", i);
+        target = get_pos_of_b(b, node_a);
+		node_a = node_a->next;
+	}
+	return(target);
 }
 
 
@@ -549,13 +575,24 @@ void ft_rotation(t_stack **a, t_stack **b)
 
 void ft_rotation(t_stack **a, t_stack **b)
 {
-    int index_a = get_index_cheapest(a, b);
-    int index_b = get_pos_of_b(b, ft_get_node(a, index_a)->value);
-    int cost_a = get_cost(size(*a), index_a);
-    int cost_b = get_cost(size(*b), index_b);
+	t_stack *node_a;
+	t_stack *target;
+	int cost;
+
+	node_a = *a;
+	while(node_a)
+	{
+		target = get_pos_of_b(b, node_a);
+		cost = get_push_cost(target, node_a, size(*a),size(*b));
+		printf("\nCost: %i\n", cost);
+		node_a = node_a->next;
+	}
+    //t_stack *index_b = get_pos_of_b(b, ft_get_node(a, index_a)->value);
+    //int cost_a = get_cost(size(*a), index_a);
+    //int cost_b = get_cost(size(*b), index_b);
     
     // Optimización: realizar rotaciones simultáneas cuando sea posible
-    while (cost_a > 0 && cost_b > 0 && 
+   /* while (cost_a > 0 && cost_b > 0 && 
           ((index_a <= size(*a)/2 && index_b <= size(*b)/2) ||
            (index_a > size(*a)/2 && index_b > size(*b)/2)))
     {
@@ -568,8 +605,8 @@ void ft_rotation(t_stack **a, t_stack **b)
             cost_a--;
             cost_b--;
         }
-    }
-    
+    }*/
+   /* 
     // Rotaciones restantes en A
     while (cost_a-- > 0) {
         if (index_a <= size(*a)/2) ra(a);
@@ -581,7 +618,7 @@ void ft_rotation(t_stack **a, t_stack **b)
         if (index_b <= size(*b)/2) rb(b);
         else rrb(b);
     }
-    
+    */
     // Finalmente hacer el push
    // pb(a, b);
 }
