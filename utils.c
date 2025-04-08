@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/07 20:29:12 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:27:51 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int max_value(t_stack **b)
             max = tmp->value;
         tmp = tmp->next;
     }
+	printf("\nFt max_value. max=%i\n", max);
     return (max);
 }
 int	min_value(t_stack *b)
@@ -202,7 +203,7 @@ int get_cost(int l, int index)
     else
       {  cost = l - index; // Rotaciones hacia abajo
 	  }
-	printf("\nCost %i\n", cost);
+	//printf("\nCost %i\n", cost);
     // Retornar el costo total
     return (cost);
 }
@@ -335,10 +336,18 @@ int get_pos_of_b(t_stack **b, int node)
     }
     // node (num)  
     // Si el número es mayor que el máximo, va después del máximo
-    if (node > max) return (max_pos);
+    if (node > max)
+	{
+		printf("\nFt get_pos_of_b. Pos=%i\n", max_pos);
+		return (max_pos);
+	}
     // Si el número es menor que el mínimo, va después del mínimo
-    if (node < min) return (min_pos + 1) % size(*b);
-    
+    if (node < min)
+	{
+		
+		printf("\nFt get_pos_of_b. Pos=%i\n", min_pos);
+		return (min_pos + 1) % size(*b);
+    }
     // Buscar posición entre dos números donde debe insertarse
     tmp = *b;
     i = 0;
@@ -407,6 +416,7 @@ int get_index_cheapest(t_stack **a, t_stack **b)
         }
         node_a = node_a->next;
     }
+	printf("\nFt get_index_cheapest. Cheapest=%i\n", cheapest_index);
     return (cheapest_index);
 }
 

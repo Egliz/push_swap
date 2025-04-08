@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/07 20:19:50 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:03:05 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,11 +156,11 @@ void rotate_b (t_stack **b)
 
 	tmp = *b;
 
-	while(tmp->value > tmp->next->value || tmp->next->value == max_value(*b))
+	while(tmp->value > tmp->next->value || tmp->next->value == max_value(b))
 		{
 			rb(b);
 			tmp = *b;
-			if (tmp->value == max_value(*b))
+			if (tmp->value == max_value(b))
 				return ;
 		}
 	
