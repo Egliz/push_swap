@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/09 20:46:01 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:50:02 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -335,27 +335,14 @@ int get_pos_of_b(t_stack **b, int node)
 
 t_stack *get_target(t_stack **b, t_stack *node)
 {
-//	int		i;
 	int		diff;
 	int		diff_two;
     t_stack *tmp;
-   /* t_stack *max;
-    t_stack *min;
-    t_stack *max_pos;
-    t_stack *min_pos;
-    */
+
     if (!*b || !node)
-		return (0);
-    
+		return (0); 
 	diff_two = INT_MAX;
     tmp = *b;
-   // max = tmp->value;
-   // min = tmp->value;
-   // max_pos = 0;
-   // min_pos = 0;
-   // i = 0;
-    
-    // Encontrar máximo y mínimo en B
     while (tmp)
     {
 		if(tmp->value < node->value)
