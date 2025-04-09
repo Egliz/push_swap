@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/08 22:22:39 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:09:56 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,9 @@
 
 typedef struct s_stack
 {
-<<<<<<< HEAD
 	int				value;
 	int				index;
-	struct s_stack  *cheap;
-=======
-	int			value;
-	int			index;
-	int			cheap;//usar para omitir funciones
->>>>>>> a30050ec114eb88fddf3401c7ab3dcc1b5f7c5cc
+	struct s_stack  *cheap;//usar para omitir funciones
 	struct s_stack	*next;
 }					t_stack;
 
