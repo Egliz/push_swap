@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/08 22:40:00 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:46:01 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,7 +333,7 @@ int get_pos_of_b(t_stack **b, int node)
 }
 *//////////////
 
-t_stack *get_pos_of_b(t_stack **b, t_stack *node)
+t_stack *get_target(t_stack **b, t_stack *node)
 {
 //	int		i;
 	int		diff;
@@ -440,7 +440,7 @@ t_stack *get_index_cheapest(t_stack **a, t_stack **b)
     {
 		i++;
 		printf("\niteracion num= %i\n", i);
-        target = get_pos_of_b(b, node_a);
+        target = get_target(b, node_a);
 		node_a = node_a->next;
 	}
 	return(target);
@@ -582,7 +582,7 @@ void ft_rotation(t_stack **a, t_stack **b)
 	node_a = *a;
 	while(node_a)
 	{
-		target = get_pos_of_b(b, node_a);
+		target = get_target(b, node_a);
 		cost = get_push_cost(target, node_a, size(*a),size(*b));
 		printf("\nCost: %i\n", cost);
 		node_a = node_a->next;
