@@ -6,7 +6,7 @@
 #    By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/03 12:19:41 by emorillo          #+#    #+#              #
-#    Updated: 2025/04/11 20:31:13 by emorillo         ###   ########.fr        #
+#    Updated: 2025/04/11 20:35:40 by emorillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FRESH = limpiador
 NAME = push_swap
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -Wall -Werror -Wextra -g 
 
 CLEAR = rm -rf
 

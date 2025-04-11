@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/09 20:56:45 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/11 21:00:22 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,7 +341,7 @@ t_stack *get_target(t_stack **b, t_stack *node)//node(nodo de A)
     t_stack *tmp;
 
     if (!*b || !node)
-		return (0); 
+		return (*b); 
 	diff_two = INT_MAX;
     tmp = *b;
     while (tmp)
@@ -570,7 +570,9 @@ void ft_rotation(t_stack **a, t_stack **b)
 	node_a = *a;
 	while(node_a)
 	{
+		printf("\nEntro en ft_rotation\n");
 		target = get_target(b, node_a);
+		printf("\nTengo el target\n");
 		cost = get_push_cost(target, node_a, size(*a),size(*b));
 		printf("\nCost: %i\n", cost);
 		node_a = node_a->next;
