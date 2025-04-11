@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/09 20:50:02 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/09 20:56:45 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,7 +333,8 @@ int get_pos_of_b(t_stack **b, int node)
 }
 *//////////////
 
-t_stack *get_target(t_stack **b, t_stack *node)
+//A cada nodo de A, le asigna su nodo objetivo de B, el objetivo es el menor maximo 
+t_stack *get_target(t_stack **b, t_stack *node)//node(nodo de A)
 {
 	int		diff;
 	int		diff_two;
