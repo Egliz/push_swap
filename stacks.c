@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:57:54 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/11 20:49:09 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:43:20 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void sort_bigg(t_stack **a, t_stack **b)
 	printf("\n\n");
 	while((size(*a)) > 3)
 	{
-		printf("\n Entro \n");
+	//	printf("\n Entro \n");
 		ft_rotation(a, b);
-		printf("\nft_rotation \n");
+	//	printf("\nft_rotation \n");
 		assign_index(a);
 		assign_index(b);
 		printf("\nA\n");

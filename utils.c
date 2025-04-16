@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/11 21:00:22 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:21:27 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,36 @@ int get_cost(t_stack *a, int l, int i) // int i)
 }*/
 
 
+int	get_cost(int size, int index)
+{
+	if (index == size / 2)
+	{
+		if (size % 2 != 0)
+			return (index);
+		else
+			return (size - index);
+	}
+	if (index < size / 2)
+		return (index);
+	return (size - index);
+}
+
+int	get_push_cost(t_stack *target, t_stack *node_a, int size_a, int size_b)
+{
+	int	cost_a;
+	int	cost_b;
+
+	cost_a = get_cost(size_a, node_a->index);
+	cost_b = get_cost(size_b, target->index);
+	return (cost_a + cost_b);
+}
+
+
+
+
+
 //				2       1
-int get_push_cost(t_stack *target,t_stack *node_a, int size_a, int size_b)
+/*int get_push_cost(t_stack *target,t_stack *node_a, int size_a, int size_b)
 {
 	int	cost_a;
 	int cost_b;
@@ -237,7 +265,7 @@ int get_push_cost(t_stack *target,t_stack *node_a, int size_a, int size_b)
 	//printf("\nCost %i\n", cost);
     // Retornar el costo total
     return (cost_a + cost_b);
-}
+}*/
 
 
 /*
@@ -340,8 +368,8 @@ t_stack *get_target(t_stack **b, t_stack *node)//node(nodo de A)
 	int		diff_two;
     t_stack *tmp;
 
-    if (!*b || !node)
-		return (*b); 
+    if (!*b || !node || !b)
+		return (NULL); 
 	diff_two = INT_MAX;
     tmp = *b;
     while (tmp)
@@ -359,6 +387,7 @@ t_stack *get_target(t_stack **b, t_stack *node)//node(nodo de A)
     }
 	if(diff_two == INT_MAX)
 	{
+		tmp = *b;
 		diff_two = 0;
 		while(tmp)
 		{
@@ -416,14 +445,11 @@ t_stack *get_index_cheapest(t_stack **a, t_stack **b)
    // int     new_cost;
     t_stack *node_a;
     //int     cheapest_index;
-    //int     index_b;
     int		i;
 	t_stack *target;
 
 	i = 0;
     node_a = *a;
-    //cost = INT_MAX;
-    //cheapest_index = 0;
     while (node_a)
     {
 		i++;
@@ -570,16 +596,13 @@ void ft_rotation(t_stack **a, t_stack **b)
 	node_a = *a;
 	while(node_a)
 	{
-		printf("\nEntro en ft_rotation\n");
+	//	printf("\nEntro en ft_rotation\n");
 		target = get_target(b, node_a);
-		printf("\nTengo el target\n");
+	//	printf("\nTengo el target\n");
 		cost = get_push_cost(target, node_a, size(*a),size(*b));
 		printf("\nCost: %i\n", cost);
 		node_a = node_a->next;
 	}
-    //t_stack *index_b = get_pos_of_b(b, ft_get_node(a, index_a)->value);
-    //int cost_a = get_cost(size(*a), index_a);
-    //int cost_b = get_cost(size(*b), index_b);
     
     // Optimización: realizar rotaciones simultáneas cuando sea posible
    /* while (cost_a > 0 && cost_b > 0 && 
