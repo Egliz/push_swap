@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:59:59 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/16 20:21:27 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/21 18:36:21 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -587,11 +587,25 @@ void ft_rotation(t_stack **a, t_stack **b)
 	}
 *////////////////
 
+
+t_stack *find_cheapest_node(t_stack *a) 
+{
+    t_stack *actual = a;
+    t_stack *cheap = actual;
+
+    while (actual != NULL) {
+        if (actual->cost < cheap->costo_total)
+            cheap = actual;
+        actual = actual->next;
+    }
+    return cheap;
+}
+
 void ft_rotation(t_stack **a, t_stack **b)
 {
 	t_stack *node_a;
 	t_stack *target;
-	int cost;
+	//int cost;
 
 	node_a = *a;
 	while(node_a)
@@ -599,10 +613,11 @@ void ft_rotation(t_stack **a, t_stack **b)
 	//	printf("\nEntro en ft_rotation\n");
 		target = get_target(b, node_a);
 	//	printf("\nTengo el target\n");
-		cost = get_push_cost(target, node_a, size(*a),size(*b));
-		printf("\nCost: %i\n", cost);
+		node_a->cost = get_push_cost(target, node_a, size(*a),size(*b));
+		printf("\nCost: %i\n", node_a->cost);
 		node_a = node_a->next;
 	}
+	//desde aqui empezar a rotar
     
     // Optimización: realizar rotaciones simultáneas cuando sea posible
    /* while (cost_a > 0 && cost_b > 0 && 

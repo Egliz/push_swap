@@ -6,7 +6,7 @@
 /*   By: emorillo <emorillo@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:20:45 by emorillo          #+#    #+#             */
-/*   Updated: 2025/04/16 18:57:42 by emorillo         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:47:54 by emorillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_stack
 {
 	int				value;
 	int				index;
+	int				cost;
 	struct s_stack  *cheap;//usar para omitir funciones
 	struct s_stack	*next;
 }					t_stack;
@@ -43,6 +44,7 @@ int		ordered(long *nb, int count);
 void	free_stack(t_stack **stack);
 int		find_max_position(t_stack *b);
 int		find_min_position(t_stack *b);
+t_stack *find_cheapest_node(t_stack *a);
 //////
 void	rotate_b(t_stack **b);
 void	ft_rotation(t_stack **a, t_stack **b);
